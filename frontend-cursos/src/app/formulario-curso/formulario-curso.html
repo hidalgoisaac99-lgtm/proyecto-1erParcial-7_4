@@ -1,0 +1,66 @@
+<div class="card shadow-sm mb-4">
+
+  <div class="card-header bg-primary text-white">
+    <h4 class="mb-0">
+      {{ cursoEditar ? 'Editar curso' : 'Registrar nuevo curso' }}
+    </h4>
+  </div>
+
+  <div class="card-body">
+
+    <form (ngSubmit)="guardarCurso()">
+
+      <div class="mb-3">
+        <label class="form-label">Nombre del curso</label>
+
+        <input
+          type="text"
+          class="form-control"
+          name="nombre"
+          [(ngModel)]="curso.nombre"
+          placeholder="Ingrese el nombre del curso"
+          required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Docente</label>
+
+        <input
+          type="text"
+          class="form-control"
+          name="docente"
+          [(ngModel)]="curso.docente"
+          placeholder="Ingrese el nombre del docente"
+          required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Estado del curso</label>
+
+        <select
+          class="form-select"
+          name="activo"
+          [(ngModel)]="curso.activo">
+
+          <option [ngValue]="true">Activo</option>
+          <option [ngValue]="false">Inactivo</option>
+
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-success me-2">
+        {{ cursoEditar ? 'Actualizar curso' : 'Guardar curso' }}
+      </button>
+
+      <button
+        *ngIf="cursoEditar"
+        type="button"
+        class="btn btn-secondary"
+        (click)="cancelarEdicion()">
+        Cancelar
+      </button>
+
+    </form>
+
+  </div>
+</div>

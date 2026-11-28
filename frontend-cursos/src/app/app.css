@@ -1,0 +1,11 @@
+main {
+  min-height: 75vh;
+}
+
+.card {
+  border-radius: 10px;
+}
+
+body {
+  background-color: #f4f6f9;
+}

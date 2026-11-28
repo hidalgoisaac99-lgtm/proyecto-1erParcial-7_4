@@ -1,0 +1,78 @@
+<div class="card shadow-sm">
+
+  <div class="card-header bg-dark text-white">
+    <h4 class="mb-0">Listado de cursos</h4>
+  </div>
+
+  <div class="card-body">
+
+    <div *ngIf="cursos.length === 0" class="alert alert-warning">
+      No existen cursos registrados.
+    </div>
+
+    <div class="table-responsive">
+
+      <table class="table table-striped table-hover">
+
+        <thead class="table-primary">
+          <tr>
+            <th>ID</th>
+            <th>Curso</th>
+            <th>Docente</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <tr *ngFor="let curso of cursos">
+
+            <td>{{ curso.id }}</td>
+
+            <td>{{ curso.nombre }}</td>
+
+            <td>{{ curso.docente }}</td>
+
+            <td>
+              <span
+                class="badge"
+                [ngClass]="curso.activo ? 'bg-success' : 'bg-danger'">
+
+                {{ curso.activo ? 'Activo' : 'Inactivo' }}
+
+              </span>
+            </td>
+
+            <td>
+
+              <button
+                class="btn btn-warning btn-sm me-1"
+                (click)="editar.emit(curso)">
+                Editar
+              </button>
+
+              <button
+                class="btn btn-danger btn-sm me-1"
+                (click)="eliminar.emit(curso.id)">
+                Eliminar
+              </button>
+
+              <button
+                class="btn btn-secondary btn-sm"
+                (click)="cambiarEstado.emit(curso.id)">
+                Cambiar estado
+              </button>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+</div>

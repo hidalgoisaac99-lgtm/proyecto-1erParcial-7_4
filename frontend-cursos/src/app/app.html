@@ -1,0 +1,64 @@
+<app-encabezado></app-encabezado>
+
+<main class="container mt-4">
+
+  <div class="row mb-4">
+
+    <div class="col-md-4">
+      <div class="card bg-primary text-white shadow-sm">
+        <div class="card-body text-center">
+
+          <h5>Total de cursos</h5>
+
+          <h2>{{ cursos.length }}</h2>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card bg-success text-white shadow-sm">
+        <div class="card-body text-center">
+
+          <h5>Cursos activos</h5>
+
+          <h2>
+            {{ cursosActivos }}
+          </h2>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card bg-danger text-white shadow-sm">
+        <div class="card-body text-center">
+
+          <h5>Cursos inactivos</h5>
+
+          <h2>
+            {{ cursosInactivos }}
+          </h2>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <app-formulario-curso
+    [cursoEditar]="cursoSeleccionado"
+    (guardar)="guardarCurso($event)"
+    (cancelar)="cancelarEdicion()">
+  </app-formulario-curso>
+
+  <app-lista-cursos
+    [cursos]="cursos"
+    (editar)="editarCurso($event)"
+    (eliminar)="eliminarCurso($event)"
+    (cambiarEstado)="cambiarEstado($event)">
+  </app-lista-cursos>
+
+</main>
+
+<app-pie-pagina></app-pie-pagina>
