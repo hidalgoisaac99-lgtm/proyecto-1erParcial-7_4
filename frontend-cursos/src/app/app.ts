@@ -39,17 +39,12 @@ export class App {
       nombre: 'Angular',
       docente: 'José Rodríguez',
       activo: false
-    },
-    {
-      id: 4,
-      nombre: 'Ingeniería de Software',
-      docente: 'Ana Torres',
-      activo: true
     }
   ];
 
   cursoSeleccionado: Curso | null = null;
 
+  // AGREGAR O ACTUALIZAR CURSO
   guardarCurso(curso: Curso): void {
 
     if (curso.id === 0) {
@@ -58,10 +53,14 @@ export class App {
         ? Math.max(...this.cursos.map(c => c.id)) + 1
         : 1;
 
-      this.cursos.push({
+      const nuevoCurso: Curso = {
         ...curso,
         id: nuevoId
-      });
+      };
+
+      this.cursos = [...this.cursos, nuevoCurso];
+
+      alert('Curso agregado correctamente');
 
     } else {
 
@@ -69,41 +68,49 @@ export class App {
         c.id === curso.id ? { ...curso } : c
       );
 
+      alert('Curso actualizado correctamente');
     }
 
     this.cursoSeleccionado = null;
   }
 
+  // EDITAR CURSO
   editarCurso(curso: Curso): void {
     this.cursoSeleccionado = { ...curso };
   }
 
+  // ELIMINAR CURSO
   eliminarCurso(id: number): void {
 
-    if (confirm('¿Está seguro de eliminar este curso?')) {
-      this.cursos = this.cursos.filter(c => c.id !== id);
-    }
+    if (confirm('¿Desea eliminar este curso?')) {
 
+      this.cursos = this.cursos.filter(c => c.id !== id);
+
+    }
   }
 
+  // CAMBIAR ESTADO
   cambiarEstado(id: number): void {
 
     this.cursos = this.cursos.map(c =>
-      c.id === id ? { ...c, activo: !c.activo } : c
+      c.id === id
+        ? { ...c, activo: !c.activo }
+        : c
     );
-
   }
 
+  // CANCELAR EDICIÓN
   cancelarEdicion(): void {
     this.cursoSeleccionado = null;
   }
 
+  // CONTADORES
   get cursosActivos(): number {
-  return this.cursos.filter(c => c.activo).length;
-}
+    return this.cursos.filter(c => c.activo).length;
+  }
 
-get cursosInactivos(): number {
-  return this.cursos.filter(c => !c.activo).length;
-}
+  get cursosInactivos(): number {
+    return this.cursos.filter(c => !c.activo).length;
+  }
 
 }
